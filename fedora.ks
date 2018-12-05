@@ -116,7 +116,7 @@ while true
     echo -e "\nPasswords do not match"
   fi
 done
-echo "rootpw --plaintext $ROOTPW" >/tmp/autopart
+echo "rootpw --plaintext $ROOTPW" > /tmp/rootpw
 
 # Set Hostname
 read -ep "Set hostname: " HOSTNAME
