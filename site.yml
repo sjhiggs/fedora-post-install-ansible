@@ -2,66 +2,6 @@
 - hosts: all 
 
   vars:
-    weechat_client_settings:  # weechat.conf
-      - section: bar
-        settings:
-            - status.items: "[time],buffer_number+: +buffer_name,[lag],competion,scroll"
-            - autoload: "*,!lua,!tcl,!ruby,!fifo,!xfer,!guile,!javascript"
-            - highmon.position: bottom
-            - highmon.items: "highmon"
-            - highmon.filling_top_bottom: "vertical"
-            - highmon.size: 0
-            - highmon.size_max: 5
-            - highmon.separator: on
-      - section: look
-        settings:
-            - highlight: "(?-i)*erich*,(?-i)*openshift*,(?-i)*docker*,(?-i)*kubernetes"
-
-    weechat_irc_settings:     # irc.conf
-      - section: look
-        settings: 
-          - server_buffer: independent                  # default (merge_with_core) 
-
-    weechat_trigger_settings: # trigger.conf
-      - section: trigger
-        settings: 
-          - beep.command: "/print -beep;/exec -bg notify-send -i '/usr/share/icons/hicolor/32x32/apps/weechat.png' ${tg_buffer} \"${tg_tag_nick}: ${tg_message_nocolor}\""
-
-    weechat_default_plugin_settings:                    # {plugin_name}.conf 
-      - plugin: buflist
-        settings:
-          - section: format
-            setting:
-              number: ""
-
-    weechat_plugins:
-      - plugin_language: python
-        plugins:
-        - url: https://weechat.org/files/scripts/autosort.py
-          autoload: yes
-      - plugin_language: perl
-        plugins:
-        - url: https://weechat.org/files/scripts/highmon.pl
-          autoload: yes
-
-    weechat_plugin_settings:                           # plugin.conf 
-      - plugin: highmon
-        section: var
-        language: perl 
-        settings:
-          - output: bar
-
-    weechat_irc_servers:
-      - server_name: Freenode
-        settings: 
-        - addresses: "chat.freenode.net/7000"
-        - ssl: on
-        - username: "sferich888"
-        - realname: "Eric Rich"
-        - nicks: "sferich888"
-        - autoconnect: on
-        - command: "/msg NickServ Identify NOPE"
-        - autojoin: "#openshift"
 
     copr_repos: 
     - rmonk/signal
@@ -75,28 +15,23 @@
       gpgcheck: yes 
 
     packages: 
-    - package: weechat
     - package: git
+    - package: terminator
     - package: vim
-    - package: tilix
-    - package: tilix-nautilus
-    - package: http://frippery.org/files/fedora/27/frippery-utils/i386/gnome-shell-frippery-3.26.2-1.noarch.rpm
+    - package: hexchat
+    - package: linphone
     - package: gnome-shell-extension-panel-osd.noarch
     - package: gnome-tweak-tool
-    - package: hub
-    - package: origin-clients
-    - package: jq
-    - package: https://dl.google.com/linux/direct/google-chrome-stable_current_x86_64.rpm
-    - package: chrome-gnome-shell
+    - package: docker
     - package: signal-desktop  ## Uses rmonk/signal (copr repo)
+    - package: firefox
+    - package: wireshark
+    - package: meld
+    - package: meld
+    - package: audacious
     - package: spotify-client
       repo: fedora-spotify-negativo17
-    - package: powerline 
-    - package: powerline-fonts
-    - package: vim-powerline
 
   roles:
-  - role: corp_repos
+  - role: copr_repos
   - role: packages
-  - role: weechat
-  - role: powerline

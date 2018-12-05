@@ -4,7 +4,7 @@
 install
 
 # Use network installation
-url --url="https://download.fedoraproject.org/pub/fedora/linux/releases/27/Everything/x86_64/os/"
+url --url="http://fedora.mirrors.pair.com/linux/releases/29/Everything/x86_64/os/"
 
 # Use graphical install
 graphical
@@ -126,7 +126,7 @@ chvt 6
 
 %post --interpreter=/bin/bash
 PRIMARY_USERNAME=$(</tmp/username)
-git clone https://github.com/sferich888/fedora-post-install-ansible.git /home/$PRIMARY_USERNAME/fedora-post-install
+git clone https://github.com/shiggs/fedora-post-install-ansible.git/tree/shiggs-fedora /home/$PRIMARY_USERNAME/fedora-post-install
 %end
 
 %packages
