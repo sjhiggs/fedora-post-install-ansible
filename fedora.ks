@@ -32,7 +32,7 @@ lang en_US.UTF-8
 
 
 # System timezone
-timezone America/New_York --isUtc --ntpservers=0.fedora.pool.ntp.org 1.fedora.pool.ntp.org
+timezone America/New_York --isUtc --ntpservers=0.fedora.pool.ntp.org,1.fedora.pool.ntp.org
 
 # System services
 services --enabled="chronyd,oddjobd"
@@ -124,9 +124,9 @@ echo "network --noipv6 --activate --bootproto=dhcp --hostname=$HOSTNAME" >/tmp/h
 chvt 6
 %end
 
-%post --interpreter=/bin/bash
+%post --interpreter=/bin/bash --log=/root/post.log
 PRIMARY_USERNAME=$(</tmp/username)
-git clone https://github.com/shiggs/fedora-post-install-ansible.git/tree/shiggs-fedora /home/$PRIMARY_USERNAME/fedora-post-install
+git clone -b shiggs-fedora https://github.com/sjhiggs/fedora-post-install-ansible.git /home/$PRIMARY_USERNAME/fedora-post-install
 %end
 
 %packages
